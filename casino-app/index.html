@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Modern Casino App</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body {
+      font-family: 'Roboto', sans-serif;
+    }
+    .fade-enter {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    .fade-enter-active {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 300ms, transform 300ms;
+    }
+  </style>
+</head>
+<body class="bg-gray-900 text-white min-h-screen flex flex-col">
+  <header class="bg-gray-800 p-4 shadow-md">
+    <h1 class="text-3xl font-bold text-center">Modern Casino App</h1>
+  </header>
+  <nav class="bg-gray-700 p-3 flex justify-center space-x-6">
+    <button id="btn-blackjack" class="text-lg hover:text-yellow-400 transition">Blackjack</button>
+    <button id="btn-roulette" class="text-lg hover:text-yellow-400 transition">Roulette</button>
+  </nav>
+  <main id="game-container" class="flex-grow p-6 flex justify-center items-center">
+    <section id="welcome-screen" class="text-center max-w-xl">
+      <h2 class="text-2xl font-semibold mb-4">Willkommen im Modern Casino</h2>
+      <p class="mb-6">Wähle ein Spiel aus der Navigation oben, um zu starten.</p>
+      <i class="fas fa-cards fa-6x text-yellow-400"></i>
+    </section>
+  </main>
+  <footer class="bg-gray-800 p-4 text-center text-sm text-gray-400">
+    &copy; 2024 Modern Casino App
+  </footer>
+  <script src="js/blackjack.js"></script>
+  <script src="js/roulette.js"></script>
+  <script>
+    const btnBlackjack = document.getElementById('btn-blackjack');
+    const btnRoulette = document.getElementById('btn-roulette');
+    const gameContainer = document.getElementById('game-container');
+
+    btnBlackjack.addEventListener('click', () => {
+      gameContainer.innerHTML = '';
+      const blackjackSection = document.createElement('section');
+      blackjackSection.id = 'blackjack-game';
+      blackjackSection.className = 'w-full max-w-4xl';
+      gameContainer.appendChild(blackjackSection);
+      loadBlackjack();
+    });
+
+    btnRoulette.addEventListener('click', () => {
+      gameContainer.innerHTML = '';
+      const rouletteSection = document.createElement('section');
+      rouletteSection.id = 'roulette-game';
+      rouletteSection.className = 'w-full max-w-4xl';
+      gameContainer.appendChild(rouletteSection);
+      loadRoulette();
+    });
+
+    function loadBlackjack() {
+      if (typeof initBlackjack === 'function') {
+        initBlackjack();
+      }
+    }
+
+    function loadRoulette() {
+      if (typeof initRoulette === 'function') {
+        initRoulette();
+      }
+    }
+  </script>
+</body>
+</html>
